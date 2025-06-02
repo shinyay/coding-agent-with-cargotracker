@@ -1,0 +1,76 @@
+name: General Task
+description: Create a general task or enhancement request
+title: "[TASK] "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for creating a task! Please fill out the information below.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Task Summary
+      description: Brief description of what needs to be done
+      placeholder: "Add user authentication system"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Detailed Description
+      description: Provide a detailed description of the task
+      placeholder: |
+        - What specifically needs to be implemented/changed?
+        - Why is this needed?
+        - Any specific requirements or constraints?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Define what "done" looks like
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this task?
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: true
+
+  - type: input
+    id: estimated-effort
+    attributes:
+      label: Estimated Effort
+      description: How much time do you think this will take?
+      placeholder: "2-3 hours, 1 day, 1 week, etc."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information, links, or resources
+      placeholder: |
+        - Related issues: #123
+        - Documentation: [link]
+        - Screenshots or mockups
+    validations:
+      required: false
