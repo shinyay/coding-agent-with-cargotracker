@@ -25,9 +25,9 @@
         <h:graphicImage value="#{resource['/images/CTlogobadge128.png']}"
           class="side-panel-img" alt="Cargo Tracker logo badge" />
         <p:menu id="side-sub-menu" styleClass="sub-menu">
-          <p:menuitem value="About"
+          <p:menuitem value="#{msg['nav.about']}"
             url="#{request.contextPath}/public/about.xhtml" />
-          <p:menuitem value="Tracking"
+          <p:menuitem value="#{msg['nav.tracking']}"
             url="#{request.contextPath}/public/track.xhtml" />
         </p:menu>
       </div>
@@ -35,7 +35,7 @@
 
     <!-- Main Section -->
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
-    <p:commandButton type="button" value="Home" styleClass="ui-button-flat" />
+    <p:commandButton type="button" value="#{msg['nav.home']}" styleClass="ui-button-flat" />
       <div class="ui-g-12 ui-g-nopad">
         <div class="ui-g">
           <ui:insert name="content">Default Content</ui:insert>

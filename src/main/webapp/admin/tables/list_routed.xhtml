@@ -1,35 +1,35 @@
 <div id="id_list_inprog_cargoes" xmlns:h="jakarta.faces.html"
   xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui">
-  <p:outputLabel value="Routed Cargo" style="font-size: 2em; font-weight: bold" />
+  <p:outputLabel value="#{msg['admin.routed.cargo']}" style="font-size: 2em; font-weight: bold" />
   <p:separator />
 
   <p:dataTable var="cargo" value="#{listCargo.routedUnclaimedCargos}"
     style="text-align: center;">
-    <p:column headerText="Tracking ID" width="94">
+    <p:column headerText="#{msg['table.tracking.id']}" width="94">
       <h:link value="#{cargo.trackingId}" id="trackingId"
         outcome="show.xhtml?faces-redirect=true" style="text-decoration: none;">
         <f:param name="trackingId" value="#{cargo.trackingId}" />
         <i class="fa fa-info-circle" style="color: #999999;"></i>
       </h:link>
       <p:tooltip id="toolTipFade" for="trackingId"
-        value="Click to see itinerary's details." />
+        value="#{msg['table.click.details']}" />
     </p:column>
 
-    <p:column headerText="Origin">
+    <p:column headerText="#{msg['table.origin']}">
       <h:outputText value="#{cargo.originName}  " />
       <br />
       <h:outputText value="#{cargo.originCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="Destination">
+    <p:column headerText="#{msg['table.destination']}">
       <h:outputText value="#{cargo.finalDestinationName}" />
       <br />
       <h:outputText value="#{cargo.finalDestinationCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="Last Known Location">
+    <p:column headerText="#{msg['table.last.location']}">
       <h:outputText value="#{cargo.lastKnownLocationName}" />
       <br />
       <h:outputText value="#{cargo.lastKnownLocationCode}"
@@ -37,11 +37,11 @@
         rendered="#{!cargo.lastKnownLocationCode.contains('XXXX')}" />
     </p:column>
 
-    <p:column headerText="Status">
+    <p:column headerText="#{msg['table.status']}">
       <h:outputText value="#{cargo.transportStatus}" />
     </p:column>
 
-    <p:column headerText="Deadline">
+    <p:column headerText="#{msg['table.deadline']}">
       <h:outputText value="#{cargo.arrivalDeadline}" />
     </p:column>
 

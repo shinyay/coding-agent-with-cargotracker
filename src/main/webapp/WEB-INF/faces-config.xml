@@ -6,5 +6,14 @@
     <action-listener>org.primefaces.application.DialogActionListener</action-listener>
     <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
     <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+    <locale-config>
+      <default-locale>ja</default-locale>
+      <supported-locale>ja</supported-locale>
+      <supported-locale>en</supported-locale>
+    </locale-config>
+    <resource-bundle>
+      <base-name>org.eclipse.cargotracker.messages</base-name>
+      <var>msg</var>
+    </resource-bundle>
   </application>
 </faces-config>

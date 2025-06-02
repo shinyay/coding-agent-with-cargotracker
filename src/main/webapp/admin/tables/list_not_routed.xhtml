@@ -1,13 +1,13 @@
 <div id="id_list_compl_cargoes" xmlns:h="jakarta.faces.html"
   xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui">
-  <p:outputLabel value="Not Routed Cargo"
+  <p:outputLabel value="#{msg['admin.not.routed.cargo']}"
     style="font-size: 2em; font-weight: bold" />
   <p:separator />
 
   <p:dataTable var="cargoNotRouted" value="#{listCargo.notRoutedCargos}"
     style="text-align: center;" id="tableNotRouted">
 
-    <p:column headerText="Tracking ID" width="94">
+    <p:column headerText="#{msg['table.tracking.id']}" width="94">
       <h:link id="trackingId" value="#{cargoNotRouted.trackingId}"
         outcome="/admin/route.xhtml?faces-redirect=true"
         style="text-decoration: none;">
@@ -18,14 +18,14 @@
         value="This cargo is not routed. Click on its tracking ID to route it!" />
     </p:column>
 
-    <p:column headerText="Origin">
+    <p:column headerText="#{msg['table.origin']}">
       <h:outputText value="#{cargoNotRouted.originName}  " />
       <br />
       <h:outputText value="#{cargoNotRouted.originCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="Destination" id="ColDest">
+    <p:column headerText="#{msg['table.destination']}" id="ColDest">
       <p:commandLink
         action="#{changeDestinationDialog.showDialog(cargoNotRouted.trackingId)}"
         style="text-decoration: none;" id="toUpdate">
@@ -42,7 +42,7 @@
       </p:commandLink>
     </p:column>
 
-    <p:column headerText="Deadline">
+    <p:column headerText="#{msg['table.deadline']}">
       <p:commandLink
         action="#{changeArrivalDeadlineDialog.showDialog(cargoNotRouted.trackingId)}"
         style="text-decoration: none;" id="arrivalDeadlineToUpdate">

@@ -11,6 +11,7 @@ import org.eclipse.cargotracker.domain.model.cargo.HandlingActivity;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.Coordinates;
 import org.eclipse.cargotracker.interfaces.CoordinatesFactory;
+import org.eclipse.cargotracker.interfaces.util.MessageUtils;
 
 /** View adapter for displaying a cargo in a tracking context. */
 public class CargoTrackingViewAdapter {
@@ -55,7 +56,7 @@ public class CargoTrackingViewAdapter {
 
   public String getLastKnownLocationName() {
     return cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString().equals("XXXXX")
-        ? "Unknown"
+        ? MessageUtils.getMessage("unknown")
         : cargo.getDelivery().getLastKnownLocation().getName();
   }
 
@@ -89,17 +90,19 @@ public class CargoTrackingViewAdapter {
 
     switch (delivery.getTransportStatus()) {
       case IN_PORT:
-        return "In port " + cargo.getRouteSpecification().getDestination().getName();
+        return MessageUtils.getMessage("cargo.status.IN_PORT", 
+            cargo.getRouteSpecification().getDestination().getName());
       case ONBOARD_CARRIER:
-        return "Onboard voyage " + delivery.getCurrentVoyage().getVoyageNumber().getIdString();
+        return MessageUtils.getMessage("cargo.status.ONBOARD_CARRIER", 
+            delivery.getCurrentVoyage().getVoyageNumber().getIdString());
       case CLAIMED:
-        return "Claimed";
+        return MessageUtils.getMessage("cargo.status.CLAIMED");
       case NOT_RECEIVED:
-        return "Not received";
+        return MessageUtils.getMessage("cargo.status.NOT_RECEIVED");
       case UNKNOWN:
-        return "Unknown";
+        return MessageUtils.getMessage("cargo.status.UNKNOWN");
       default:
-        return "[Unknown status]"; // Should never happen.
+        return MessageUtils.getMessage("cargo.status.UNKNOWN"); // Should never happen.
     }
   }
 
@@ -124,25 +127,23 @@ public class CargoTrackingViewAdapter {
       return "";
     }
 
-    String text = "Next expected activity is to ";
+    String baseKey = "activity.next.";
     HandlingEvent.Type type = activity.getType();
 
     if (type.sameValueAs(HandlingEvent.Type.LOAD)) {
-      return text
-          + type.name().toLowerCase()
-          + " cargo onto voyage "
-          + activity.getVoyage().getVoyageNumber()
-          + " in "
-          + activity.getLocation().getName();
+      return MessageUtils.getMessage(baseKey + "load",
+          MessageUtils.getMessage("activity.load"),
+          activity.getVoyage().getVoyageNumber(),
+          activity.getLocation().getName());
     } else if (type.sameValueAs(HandlingEvent.Type.UNLOAD)) {
-      return text
-          + type.name().toLowerCase()
-          + " cargo off of "
-          + activity.getVoyage().getVoyageNumber()
-          + " in "
-          + activity.getLocation().getName();
+      return MessageUtils.getMessage(baseKey + "unload",
+          MessageUtils.getMessage("activity.unload"),
+          activity.getVoyage().getVoyageNumber(),
+          activity.getLocation().getName());
     } else {
-      return text + type.name().toLowerCase() + " cargo in " + activity.getLocation().getName();
+      return MessageUtils.getMessage(baseKey + "other",
+          MessageUtils.getMessage("activity." + type.name().toLowerCase()),
+          activity.getLocation().getName());
     }
   }
 
@@ -171,23 +172,24 @@ public class CargoTrackingViewAdapter {
     public String getDescription() {
       switch (handlingEvent.getType()) {
         case LOAD:
-          return "Loaded onto voyage "
-              + handlingEvent.getVoyage().getVoyageNumber().getIdString()
-              + " in "
-              + handlingEvent.getLocation().getName();
+          return MessageUtils.getMessage("event.loaded",
+              handlingEvent.getVoyage().getVoyageNumber().getIdString(),
+              handlingEvent.getLocation().getName());
         case UNLOAD:
-          return "Unloaded off voyage "
-              + handlingEvent.getVoyage().getVoyageNumber().getIdString()
-              + " in "
-              + handlingEvent.getLocation().getName();
+          return MessageUtils.getMessage("event.unloaded",
+              handlingEvent.getVoyage().getVoyageNumber().getIdString(),
+              handlingEvent.getLocation().getName());
         case RECEIVE:
-          return "Received in " + handlingEvent.getLocation().getName();
+          return MessageUtils.getMessage("event.received",
+              handlingEvent.getLocation().getName());
         case CLAIM:
-          return "Claimed in " + handlingEvent.getLocation().getName();
+          return MessageUtils.getMessage("event.claimed",
+              handlingEvent.getLocation().getName());
         case CUSTOMS:
-          return "Cleared customs in " + handlingEvent.getLocation().getName();
+          return MessageUtils.getMessage("event.customs",
+              handlingEvent.getLocation().getName());
         default:
-          return "[Unknown]";
+          return MessageUtils.getMessage("unknown");
       }
     }
   }
