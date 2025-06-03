@@ -3,7 +3,7 @@
   xmlns:ui="jakarta.faces.facelets"
   xmlns:p="http://primefaces.org/ui" xmlns:f="jakarta.faces.core">
 <ui:composition template="/WEB-INF/templates/common/public.xhtml">
-  <ui:define name="title">#{msg['tracking.title']}</ui:define>
+  <ui:define name="title">Track Cargo</ui:define>
   <ui:define name="content">
     <div class="ui-grid-col-2" id="leftCol"></div>
     <div class="ui-grid-col-8" id="container" style="display: none">
@@ -11,11 +11,11 @@
       <p:card>
           <h:form id="trackingForm">
             <h:panelGrid columns="3" cellpadding="15">
-              <p>#{msg['tracking.instruction']}:</p>
+              <p>Enter your tracking ID:</p>
               <p:inputText id="trackingIdInput"
                 value="#{public.track.trackingId}" required="true"
-                placeholder="XYZ789" title="#{msg['table.tracking.id']}" />
-              <p:commandButton value="#{msg['button.track']}"
+                placeholder="XYZ789" title="Valid tracking ID" />
+              <p:commandButton value="Track!"
                   action="#{public.track.onTrackById()}" update="cargo-status" />
             </h:panelGrid>
           </h:form>
@@ -28,45 +28,37 @@
           <h:panelGroup rendered="#{not empty public.track.cargo}">
             <div id="result">
               <p>
-                <h:outputFormat value="#{msg['tracking.result.current.status']}">
-                  <f:param value="#{public.track.cargo.trackingId}" />
-                  <f:param value="#{public.track.cargo.statusText}" />
-                </h:outputFormat>
+                Cargo <strong>#{public.track.cargo.trackingId}</strong> is
+                currently <strong>#{public.track.cargo.statusText}</strong>
               </p>
 
               <p>
-                <h:outputFormat value="#{msg['tracking.result.eta']}">
-                  <f:param value="#{public.track.cargo.destinationName}" />
-                  <f:param value="#{public.track.cargo.eta}" />
-                </h:outputFormat>
+                Estimated time of arrival in <strong>#{public.track.cargo.destinationName}</strong>:
+                #{public.track.cargo.eta}
               </p>
               <ui:fragment
                 rendered="#{not empty public.track.cargo.nextExpectedActivity}">
-                <p><h:outputFormat value="#{msg['tracking.result.next.activity']}">
-                    <f:param value="#{public.track.cargo.nextExpectedActivity}" />
-                  </h:outputFormat></p>
+                <p>#{public.track.cargo.nextExpectedActivity}</p>
               </ui:fragment>
 
               <p:panel rendered="#{public.track.cargo.misdirected}">
                 <p>
                   <i class="fa fa-exclamation-triangle" style="color: #9b2332"></i>
-                  #{msg['tracking.result.misdirected']}
+                  Cargo is misdirected.
                 </p>
               </p:panel>
             </div>
           </h:panelGroup>
 
-          <h:outputFormat
-            value="#{msg['tracking.result.not.found']}"
-            rendered="#{empty public.track.cargo and not empty public.track.trackingId}">
-            <f:param value="#{public.track.trackingId}" />
-          </h:outputFormat>
+          <p:outputLabel
+            value="Cargo with tracking ID #{public.track.trackingId} not found."
+            rendered="#{empty public.track.cargo and not empty public.track.trackingId}" />
         </div>
 
         <h:panelGroup rendered="#{not empty public.track.cargo}">
           <div class="ui-g ui-g-12">
             <div class="ui-g-3">
-              <p:outputLabel value="#{msg['tracking.handling.history']}"
+              <p:outputLabel value="Handling History"
                 style="font-size: 2em; font-weight: bold" />
             </div>
 
@@ -89,11 +81,9 @@
                 </div>
               </ui:repeat>
 
-              <h:outputFormat
-                value="#{msg['tracking.no.events']}"
-                rendered="#{empty public.track.cargo.events}">
-                <f:param value="#{public.track.cargo.trackingId}" />
-              </h:outputFormat>
+              <p:outputLabel
+                value="There are no events recorded for the tracking ID #{public.track.cargo.trackingId}."
+                rendered="#{empty public.track.cargo.events}" />
             </div>
           </div>
 

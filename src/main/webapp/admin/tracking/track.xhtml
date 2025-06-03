@@ -3,7 +3,7 @@
   xmlns:ui="jakarta.faces.facelets"
   xmlns:p="http://primefaces.org/ui" xmlns:f="jakarta.faces.core">
 <ui:composition template="/WEB-INF/templates/common/admin.xhtml">
-  <ui:define name="title">#{msg['tracking.title']}</ui:define>
+  <ui:define name="title">Track Cargo</ui:define>
   <ui:define name="content">
 
     <div class="ui-grid-col-2" id="leftCol"></div>
@@ -13,13 +13,13 @@
       <p:card>
         <h:form id="trackingForm">
           <h:panelGrid columns="3" cellpadding="15">
-            <p>#{msg['tracking.instruction']}:</p>
+            <p>Enter your tracking ID:</p>
             <p:autoComplete id="trackingIdInput"
               value="#{admin.track.trackingId}" required="true"
               forceSelection="true" placeholder="XYZ789"
-              title="#{msg['table.tracking.id']}"
+              title="Valid tracking ID"
               completeMethod="#{admin.track.getTrackingIds}" />
-            <p:commandButton value="#{msg['button.track']}"
+            <p:commandButton value="Track!"
               action="#{admin.track.onTrackById()}" update="cargo-status" />
           </h:panelGrid>
         </h:form>
@@ -57,23 +57,21 @@
               <h:panelGroup rendered="#{admin.track.cargo.misdirected}">
                 <p>
                   <i class="fa fa-exclamation-triangle" style="color: #9b2332"></i>
-                  #{msg['tracking.result.misdirected']}
+                  Cargo is misdirected.
                 </p>
               </h:panelGroup>
             </div>
           </h:panelGroup>
 
-          <h:outputFormat
-            value="#{msg['tracking.result.not.found']}"
-            rendered="#{empty admin.track.cargo and not empty admin.track.trackingId}">
-            <f:param value="#{admin.track.trackingId}" />
-          </h:outputFormat>
+          <h:outputLabel
+            value="Cargo with tracking ID #{admin.track.trackingId} not found."
+            rendered="#{empty admin.track.cargo and not empty admin.track.trackingId}" />
         </div>
 
         <h:panelGroup rendered="#{not empty admin.track.cargo}">
           <div class="ui-g ui-g-12">
             <div class="ui-g-3">
-              <p:outputLabel value="#{msg['tracking.handling.history']}"
+              <p:outputLabel value="Handling History"
                 style="font-size: 2em; font-weight: bold" />
             </div>
 

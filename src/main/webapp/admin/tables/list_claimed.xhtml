@@ -1,34 +1,34 @@
 <div id="id_list_compl_cargoes" xmlns:h="jakarta.faces.html"
   xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui">
-  <p:outputLabel value="#{msg['cargo.claimed']}" style="font-size: 2em; font-weight: bold" />
+  <p:outputLabel value="Claimed Cargo" style="font-size: 2em; font-weight: bold" />
   <p:separator />
   <p:dataTable var="cargo" value="#{listCargo.claimedCargos}"
     style="text-align: center;">
 
-    <p:column headerText="#{msg['table.tracking.id']}" width="94">
+    <p:column headerText="Tracking ID" width="94">
       <h:link value="#{cargo.trackingId}" id="trackingId"
         outcome="show.xhtml?faces-redirect=true" style="text-decoration: none;">
         <f:param name="trackingId" value="#{cargo.trackingId}" />
         <i class="fa fa-info-circle" style="color: #999999;"></i>
       </h:link>
-      <p:tooltip id="toolTipFade" for="trackingId" value="クリックして履歴を表示してください。" />
+      <p:tooltip id="toolTipFade" for="trackingId" value="Click to see history." />
     </p:column>
 
-    <p:column headerText="#{msg['table.origin']}">
+    <p:column headerText="Origin">
       <h:outputText value="#{cargo.originName}  " />
       <br />
       <h:outputText value="#{cargo.originCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="#{msg['table.destination']}">
+    <p:column headerText="Destination">
       <h:outputText value="#{cargo.finalDestinationName}  " />
       <br />
       <h:outputText value="#{cargo.finalDestinationCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="#{msg['table.deadline']}">
+    <p:column headerText="Deadline">
       <h:outputText value="#{cargo.arrivalDeadline}" />
     </p:column>
   </p:dataTable>
