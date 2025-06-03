@@ -4,7 +4,7 @@
   xmlns:p="http://primefaces.org/ui"
   xmlns:ui="jakarta.faces.facelets">
 <ui:composition template="/WEB-INF/templates/common/admin.xhtml">
-  <ui:define name="title">Cargo Registration</ui:define>
+  <ui:define name="title">#{msg['booking.title']}</ui:define>
   <h:head>
     <style>
 <!--
@@ -20,8 +20,9 @@ work around to fix selectonemenu bug in Chrome & Safari
     <div class="ui-g-8" id="mainCol">
       <br />
       <h:form>
-        <p:outputLabel
-          value="2. Set the destination for this new cargo coming from #{booking.originName}" />
+        <h:outputFormat value="#{msg['booking.step2']}">
+          <f:param value="#{booking.originName}" />
+        </h:outputFormat>
         <hr />
         <p:selectOneMenu id="destination" value="#{booking.destinationUnlocode}">
           <f:selectItems value="#{booking.locations}" var="location"
@@ -30,9 +31,9 @@ work around to fix selectonemenu bug in Chrome & Safari
         <hr />
         <h:panelGrid columns="3" styleClass="registrationPanelGrid"
           style="margin: 0 auto;">
-          <p:commandButton value="Back" action="booking" />
-          <p:commandButton value="Cancel" action="/admin/dashboard" />
-          <p:commandButton value="Next" action="booking-date" />
+          <p:commandButton value="#{msg['button.back']}" action="booking" />
+          <p:commandButton value="#{msg['button.cancel']}" action="/admin/dashboard" />
+          <p:commandButton value="#{msg['button.next']}" action="booking-date" />
         </h:panelGrid>
       </h:form>
     </div>

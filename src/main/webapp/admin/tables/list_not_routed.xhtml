@@ -1,13 +1,13 @@
 <div id="id_list_compl_cargoes" xmlns:h="jakarta.faces.html"
   xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui">
-  <p:outputLabel value="Not Routed Cargo"
+  <p:outputLabel value="#{msg['cargo.not.routed']}"
     style="font-size: 2em; font-weight: bold" />
   <p:separator />
 
   <p:dataTable var="cargoNotRouted" value="#{listCargo.notRoutedCargos}"
     style="text-align: center;" id="tableNotRouted">
 
-    <p:column headerText="Tracking ID" width="94">
+    <p:column headerText="#{msg['table.tracking.id']}" width="94">
       <h:link id="trackingId" value="#{cargoNotRouted.trackingId}"
         outcome="/admin/route.xhtml?faces-redirect=true"
         style="text-decoration: none;">
@@ -15,17 +15,17 @@
         <i class="fa fa-globe" style="color: #999999;" />
       </h:link>
       <p:tooltip id="toolTipFade" for="trackingId"
-        value="This cargo is not routed. Click on its tracking ID to route it!" />
+        value="この貨物はルート設定されていません。追跡IDをクリックしてルートを設定してください！" />
     </p:column>
 
-    <p:column headerText="Origin">
+    <p:column headerText="#{msg['table.origin']}">
       <h:outputText value="#{cargoNotRouted.originName}  " />
       <br />
       <h:outputText value="#{cargoNotRouted.originCode}"
         style="color: #999999;font-size:.8em;" />
     </p:column>
 
-    <p:column headerText="Destination" id="ColDest">
+    <p:column headerText="#{msg['table.destination']}" id="ColDest">
       <p:commandLink
         action="#{changeDestinationDialog.showDialog(cargoNotRouted.trackingId)}"
         style="text-decoration: none;" id="toUpdate">
@@ -38,11 +38,11 @@
           listener="#{changeDestinationDialog.handleReturn}"
           update="tableNotRouted" />
         <p:tooltip id="updateToolTipFade" for="toUpdate"
-          value="Click to change cargo destination." />
+          value="クリックして貨物の目的地を変更してください。" />
       </p:commandLink>
     </p:column>
 
-    <p:column headerText="Deadline">
+    <p:column headerText="#{msg['table.deadline']}">
       <p:commandLink
         action="#{changeArrivalDeadlineDialog.showDialog(cargoNotRouted.trackingId)}"
         style="text-decoration: none;" id="arrivalDeadlineToUpdate">
@@ -52,7 +52,7 @@
           listener="#{changeArrivalDeadlineDialog.handleReturn}"
           update="tableNotRouted" />
         <p:tooltip id="updateToolTipFadeArrival" for="arrivalDeadlineToUpdate"
-          value="Click to change cargo arrival deadline." />
+          value="クリックして貨物の到着期限を変更してください。" />
       </p:commandLink>
     </p:column>
   </p:dataTable>
