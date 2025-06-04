@@ -1,0 +1,184 @@
+name: Coding Agent Task
+description: Create a task optimized for GitHub Coding Agent automation
+title: "[CODE] "
+labels: ["coding-agent", "task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤖 Coding Agent Optimized Task
+        This template is designed to provide all necessary information for the GitHub Coding Agent to generate high-quality code solutions.
+
+  - type: input
+    id: purpose
+    attributes:
+      label: "1️⃣ Purpose - What & Why"
+      description: "Clear, specific goal and business reason"
+      placeholder: "Add JWT-based user authentication to allow secure API access for mobile app integration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: "2️⃣ Prerequisites & Context"
+      description: "Technical context the Coding Agent needs to know"
+      placeholder: |
+        **Repository**: owner/repo-name
+        **Base Branch**: main (or specify different branch)
+        **Tech Stack**: Node.js, Express.js, MongoDB, React
+        **Existing Patterns**: We use middleware pattern for auth, Jest for testing
+        **Dependencies**: Already using bcrypt, express-session
+        **File Structure**: /src/controllers, /src/middleware, /src/models
+      value: |
+        **Repository**:
+        **Base Branch**:
+        **Tech Stack**:
+        **Existing Patterns**:
+        **Dependencies**:
+        **File Structure**:
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed-requirements
+    attributes:
+      label: "3️⃣ Detailed Requirements"
+      description: "Specific implementation details and functionality"
+      placeholder: |
+        **Core Functionality**:
+        - User registration with email/password
+        - Login/logout endpoints
+        - JWT token generation and validation
+        - Password hashing with bcrypt
+        - Protected route middleware
+
+        **Specific Requirements**:
+        - Tokens expire after 24 hours
+        - Include user role in JWT payload
+        - Return user profile data on login
+        - Validate email format
+        - Minimum password length: 8 characters
+    validations:
+      required: true
+
+  - type: textarea
+    id: considerations
+    attributes:
+      label: "4️⃣ Points to Consider"
+      description: "Important technical and business considerations"
+      placeholder: |
+        **Security**: Hash passwords, secure JWT secret, input validation
+        **Performance**: Database indexing on email field, efficient queries
+        **Error Handling**: Proper HTTP status codes, meaningful error messages
+        **Scalability**: Consider rate limiting, token refresh strategy
+        **Compatibility**: Must work with existing user model
+        **Testing**: Unit tests for auth functions, integration tests for endpoints
+      value: |
+        **Security**:
+        **Performance**:
+        **Error Handling**:
+        **Scalability**:
+        **Compatibility**:
+        **Testing**:
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable-conditions
+    attributes:
+      label: "5️⃣ Deliverable Requirements"
+      description: "Specific conditions the code must meet"
+      placeholder: |
+        **Code Quality**:
+        - Follow existing ESLint configuration
+        - Use TypeScript if project uses it
+        - Include JSDoc comments for public functions
+        - Follow existing naming conventions
+
+        **Files to Create/Modify**:
+        - /src/middleware/auth.js
+        - /src/controllers/authController.js
+        - /src/models/User.js (if modifications needed)
+        - /tests/auth.test.js
+
+        **Documentation**:
+        - Update API documentation
+        - Include usage examples in comments
+        - Update README if new environment variables added
+
+        **Testing**:
+        - Minimum 80% code coverage
+        - Include both positive and negative test cases
+        - Test all error scenarios
+      value: |
+        **Code Quality**:
+        -
+        -
+
+        **Files to Create/Modify**:
+        -
+        -
+
+        **Documentation**:
+        -
+        -
+
+        **Testing**:
+        -
+        -
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How urgent is this implementation?
+      options:
+        - Low - Can wait for next sprint
+        - Medium - Should be completed this sprint
+        - High - Needed for upcoming release
+        - Critical - Blocking other work
+    validations:
+      required: true
+
+  - type: input
+    id: estimated-effort
+    attributes:
+      label: Estimated Complexity
+      description: "Help the agent understand scope (Small/Medium/Large/XL)"
+      placeholder: "Medium - Multiple files, database changes, comprehensive testing"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: "📝 Additional Notes & References"
+      description: "Any other helpful information"
+      placeholder: |
+        **Related Issues**: #123, #456
+        **Documentation**: [Auth Flow Diagram](link), [API Spec](link)
+        **Examples**: Similar implementation in other-repo/auth-module
+        **Environment**: Staging environment available for testing
+        **Reviewers**: Tag @security-team for security review
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: readiness-checklist
+    attributes:
+      label: "✅ Readiness Checklist"
+      description: "Confirm this task is ready for the Coding Agent"
+      options:
+        - label: "Purpose is clear and specific"
+          required: true
+        - label: "Prerequisites and technical context provided"
+          required: true
+        - label: "Requirements are detailed and actionable"
+          required: true
+        - label: "Quality standards and deliverable conditions specified"
+          required: true
+        - label: "Repository and branch information provided"
+          required: true
